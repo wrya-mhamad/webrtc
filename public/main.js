@@ -1,24 +1,26 @@
-const socket = io('https://progrtc.herokuapp.com');
-//$('#div-chat').hide();
+const socket = io();
 
-const peer = new Peer(undefined,{ 
-    host: 'mpeer.herokuapp.com',
-    port: 443,
-    secure: true
+$('#div-chat').hide();
+
+let customConfig;
+
+$.ajax({
+  url: "https://service.xirsys.com/ice",
+  data: {
+    ident: "vanpho",
+    secret: "2b1c2dfe-4374-11e7-bd72-5a790223a9ce",
+    domain: "vanpho93.github.io",
+    application: "default",
+    room: "default",
+    secure: 1
+  },
+  success: function (data, status) {
+    // data.d is where the iceServers object lives
+    customConfig = data.d;
+    console.log(customConfig);
+  },
+  async: false
 });
-
-console.log(peer)
-
-
-peer.on('open', id => {
-  console.log(id)
-    $('#my-peer').append(id);
-    $('#btnSignUp').click(() => {
-        const username = $('#txtUsername').val();
-        socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
-    });
-});
-
 
 socket.on('DANH_SACH_ONLINE', arrUserInfo => {
     $('#div-chat').show();
@@ -56,7 +58,19 @@ function playStream(idVideoTag, stream) {
 // openStream()
 // .then(stream => playStream('localStream', stream));
 
+const peer = new Peer(undefined,{ 
+    host: 'mpeer.herokuapp.com',
+    port: 443,
+    secure: true
+});
 
+peer.on('open', id => {
+    $('#my-peer').append(id);
+    $('#btnSignUp').click(() => {
+        const username = $('#txtUsername').val();
+        socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
+    });
+});
 
 //Caller
 $('#btnCall').click(() => {
