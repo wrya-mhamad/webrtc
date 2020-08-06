@@ -1,6 +1,6 @@
 const socket = io('https://progrtc.herokuapp.com');
 console.log(socket)
-$('#div-chat').hide();
+//$('#div-chat').hide();
 
 let customConfig;
 
