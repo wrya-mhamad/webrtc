@@ -1,4 +1,4 @@
-const socket = io('/');
+const socket = io('https://progrtc.herokuapp.com');
 
 $('#div-chat').hide();
 
