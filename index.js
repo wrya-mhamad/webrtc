@@ -2,6 +2,12 @@ var express = require('express');
 var app = express()
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+
+
+const { PeerServer } = require('peer');
+
+const peerServer = PeerServer({ port: 9000, path: '/myapp' });
+
 app.use(express.static('public'))
 app.get('/', (req, res) => {
     res.sendFile('index.html')
