@@ -2,6 +2,22 @@ const socket = io('https://progrtc.herokuapp.com');
 console.log(socket)
 //$('#div-chat').hide();
 
+const peer = new Peer({ 
+    host: 'progrtc.herokuapp.com',
+    port: 9000,
+    path: '/myapp',
+});
+
+
+peer.on('open', id => {
+  console.log(id)
+    $('#my-peer').append(id);
+    $('#btnSignUp').click(() => {
+        const username = $('#txtUsername').val();
+        socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
+    });
+});
+
 
 socket.on('DANH_SACH_ONLINE', arrUserInfo => {
     $('#div-chat').show();
@@ -39,20 +55,7 @@ function playStream(idVideoTag, stream) {
 // openStream()
 // .then(stream => playStream('localStream', stream));
 
-const peer = new Peer({ 
-    host: 'progrtc.herokuapp.com',
-    port: 9000,
-    path: '/myapp',
-});
 
-peer.on('open', id => {
-  console.log(id)
-    $('#my-peer').append(id);
-    $('#btnSignUp').click(() => {
-        const username = $('#txtUsername').val();
-        socket.emit('NGUOI_DUNG_DANG_KY', { ten: username, peerId: id });
-    });
-});
 
 //Caller
 $('#btnCall').click(() => {
