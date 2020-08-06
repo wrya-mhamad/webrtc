@@ -58,8 +58,10 @@ function playStream(idVideoTag, stream) {
 // openStream()
 // .then(stream => playStream('localStream', stream));
 
-const peer = new Peer({ 
-    key: 'peerjs', 
+const peer = new Peer(undefined , {
+  host: 'meetclone.herokuapp.com',
+  secure: true,
+  port: 443,
 });
 
 peer.on('open', id => {
