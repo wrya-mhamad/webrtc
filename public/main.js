@@ -4,7 +4,7 @@ const socket = io('https://progrtc.herokuapp.com');
 const peer = new Peer(undefined,{ 
     host: 'progrtc.herokuapp.com',
     port: 9000,
-    path: '/myapp',
+    secure: true
 });
 
 console.log(peer)
