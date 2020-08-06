@@ -58,7 +58,7 @@ function playStream(idVideoTag, stream) {
 // openStream()
 // .then(stream => playStream('localStream', stream));
 
-const peer = new Peer(undefined,{ 
+const peer = new Peer({ 
     host: 'progrtc.herokuapp.com',
     port: 9000,
     path: '/myapp',
