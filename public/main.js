@@ -2,25 +2,6 @@ const socket = io('https://progrtc.herokuapp.com');
 console.log(socket)
 //$('#div-chat').hide();
 
-let customConfig;
-
-$.ajax({
-  url: "https://service.xirsys.com/ice",
-  data: {
-    ident: "vanpho",
-    secret: "2b1c2dfe-4374-11e7-bd72-5a790223a9ce",
-    domain: "vanpho93.github.io",
-    application: "default",
-    room: "default",
-    secure: 1
-  },
-  success: function (data, status) {
-    // data.d is where the iceServers object lives
-    customConfig = data.d;
-    console.log(customConfig);
-  },
-  async: false
-});
 
 socket.on('DANH_SACH_ONLINE', arrUserInfo => {
     $('#div-chat').show();
@@ -65,6 +46,7 @@ const peer = new Peer({
 });
 
 peer.on('open', id => {
+  console.log(id)
     $('#my-peer').append(id);
     $('#btnSignUp').click(() => {
         const username = $('#txtUsername').val();
