@@ -1,5 +1,4 @@
 const socket = io('https://progrtc.herokuapp.com');
-console.log(socket)
 //$('#div-chat').hide();
 
 const peer = new Peer({ 
@@ -7,6 +6,8 @@ const peer = new Peer({
     port: 9000,
     path: '/myapp',
 });
+
+console.log(peer)
 
 
 peer.on('open', id => {
